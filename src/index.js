@@ -23,10 +23,11 @@ Endpoints
 */
 
 // Callbacks
-const handleClick = (ramenElm) => {
+const handleClick = async (ramenElm) => {
   // Add code
   const ramenId = ramenElm.dataset.id;
-  fetch(`http://localhost:3000/ramens/${ramenId}`)
+  // console.log("ramenElm:", ramenElm);
+  await fetch(`http://localhost:3000/ramens/${ramenId}`)
     .then((response) => response.json())
     .then((ramen) => {
       const detailImage = document.querySelector(".detail-image");
@@ -54,7 +55,6 @@ const handleSubmit = (event) => {
     rating,
     comment,
   };
-  console.log("newRamen", JSON.stringify(newRamen));
 
   // add new ramen to server
   fetch("http://localhost:3000/ramens", {
@@ -78,7 +78,8 @@ const handleSubmit = (event) => {
 
 const addSubmitListener = () => {
   // Add code
-  document.querySelector("#new-ramen").addEventListener("submit", handleSubmit);
+  const newRamenForm = document.querySelector("#new-ramen");
+  newRamenForm.addEventListener("submit", handleSubmit);
 };
 
 const displayRamens = () => {
@@ -92,21 +93,19 @@ const displayRamens = () => {
         img.src = ramen.image;
         img.alt = ramen.name;
         img.dataset.id = ramen.id;
-        img.addEventListener("click", () => handleClick(img));
         document.querySelector("#ramen-menu").appendChild(img);
+        img.addEventListener("click", () => handleClick(img));
       });
     })
     .catch((error) => console.error(error));
 };
 
 const main = () => {
-  // Invoke displayRamens here
   displayRamens();
-  // Invoke addSubmitListener here
   addSubmitListener();
 };
 
-main();
+document.addEventListener("DOMContentLoaded", main);
 
 // Export functions for testing
 export { displayRamens, addSubmitListener, handleClick, main };

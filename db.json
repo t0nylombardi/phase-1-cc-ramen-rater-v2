@@ -39,38 +39,6 @@
       "image": "./assets/ramen/kojiro.jpg",
       "rating": 6,
       "comment": "Perfect for a cold night."
-    },
-    {
-      "id": "f617",
-      "name": "Tonkotsu ramen",
-      "restaurant": "Ichiran",
-      "image": "https://lh3.googleusercontent.com/p/AF1QipP3X8u71YY8MeiIQZ5EK3rwkWO0qRgxsQ0CJSvR=s1360-w1360-h1020",
-      "rating": "45",
-      "comment": "Classic Ramen at the best place to serve it. "
-    },
-    {
-      "id": "a88d",
-      "name": "peter",
-      "restaurant": "lugger",
-      "image": "https://glebekitchen.com/wp-content/uploads/2017/04/tonkotsuramenfront.jpg",
-      "rating": "2",
-      "comment": "its a stakehouse not a ramen place"
-    },
-    {
-      "id": "5878",
-      "name": "dsc",
-      "restaurant": "adsf",
-      "image": "./assets/ramen/kojiro.jpg",
-      "rating": "1",
-      "comment": "efd"
-    },
-    {
-      "id": "4aad",
-      "name": "scdv",
-      "restaurant": "cvascvz",
-      "image": "./assets/ramen/kojiro.jpg",
-      "rating": "1",
-      "comment": "asdf"
     }
   ]
 }
