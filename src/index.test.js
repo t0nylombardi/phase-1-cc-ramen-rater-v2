@@ -178,7 +178,7 @@ describe("handleSubmit", () => {
     ramenFormRating.value = newRamen.rating;
     ramenFormComment.value = newRamen.comment;
     console.log(
-      "🚀 ~ file: index.test.js:171 ~ ",
+      "🚀 ~ file: index.test.js:182 ~ ",
       ramenFormName.value,
       ramenFormRestaurant.value,
       ramenFormImage.value,
@@ -236,7 +236,9 @@ describe("handleSubmit", () => {
     fireEvent.click(submitButton);
 
     const ramenMenuDivAfter = document.querySelectorAll("#ramen-menu img");
-    const img = ramenMenuDivAfter[ramenMenuDivBefore.length];
+    // minus 1 because the array is 0-indexed
+    const img = ramenMenuDivAfter[ramenMenuDivBefore.length - 1];
+
     img.addEventListener("click", (event) => {
       handleClick(newRamen, event);
     });
@@ -257,3 +259,44 @@ describe("handleSubmit", () => {
     expect(detailsComment.textContent).toBe(newRamen.comment);
   });
 });
+
+// handleEditRamen
+describe.skip("handleEditRamen", () => {
+  it("should update the ramen details when the form is submitted", () => {
+    const ramen = testResponseData[0];
+    const ramenForm = document.getElementById("new-ramen");
+    const ramenFormName = document.querySelector("#new-ramen #new-name");
+    const ramenFormRestaurant = document.querySelector(
+      "#new-ramen #new-restaurant"
+    );
+    const ramenFormImage = document.querySelector("#new-ramen #new-image");
+    const ramenFormRating = document.querySelector("#new-ramen #new-rating  ");
+    const ramenFormComment = document.querySelector("#new-ramen #new-comment");
+    const submitButton = document.getElementById("submit-button");
+
+    main(ramenForm);
+
+    ramenFormName.value = ramen.name;
+    ramenFormRestaurant.value = ramen.restaurant;
+    ramenFormImage.value = ramen.image;
+    ramenFormRating.value = ramen.rating;
+    ramenFormComment.value = ramen.comment;
+
+    fireEvent.click(submitButton);
+
+    const detailImg = document.querySelector("#ramen-detail > .detail-image");
+    const detailName = document.querySelector("#ramen-detail > .name");
+    const detailRestaurant = document.querySelector(
+      "#ramen-detail > .restaurant"
+    );
+    const detailsRating = document.getElementById("rating-display");
+    const detailsComment = document.getElementById("comment-display");
+
+    expect(detailName.textContent).toBe(ramen.name);
+    expect(detailRestaurant.textContent).toBe(ramen.restaurant);
+    expect(detailImg.src).toBe(ramen.image);
+    expect(detailsRating.textContent).toBe(ramen.rating.toString());
+  });
+});
+
+// handleDeleteRamen

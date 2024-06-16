@@ -39,6 +39,38 @@
       "image": "./assets/ramen/kojiro.jpg",
       "rating": 6,
       "comment": "Perfect for a cold night."
+    },
+    {
+      "id": "6",
+      "name": "Mat",
+      "restaurant": "Test",
+      "image": "./assets/ramen/nirvana.jpg",
+      "rating": "4",
+      "comment": "test"
+    },
+    {
+      "id": "7",
+      "name": "Anthony Lombardi",
+      "restaurant": "Ichiran",
+      "image": "http://127.0.0.1:5500/assets/ramen/shoyu.jpg",
+      "rating": "5",
+      "comment": "sdgfh"
+    },
+    {
+      "id": 8,
+      "name": "Anthony Lombardi",
+      "restaurant": "Ichiran",
+      "image": "https://www.halfbakedharvest.com/wp-content/uploads/2023/11/Spicy-Miso-Braised-Beef-Ramen-1-500x500.jpg",
+      "rating": "3",
+      "comment": "asfdsf"
+    },
+    {
+      "id": 9,
+      "name": "Anthony Lombardi",
+      "restaurant": "Ichiran",
+      "image": "http://127.0.0.1:5500/assets/ramen/shoyu.jpg",
+      "rating": "5",
+      "comment": "sdfgdsfg"
     }
   ]
 }
