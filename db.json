@@ -49,20 +49,20 @@
       "comment": "Classic Ramen at the best place to serve it. "
     },
     {
-      "id": "a88d",
-      "name": "peter",
-      "restaurant": "lugger",
-      "image": "https://glebekitchen.com/wp-content/uploads/2017/04/tonkotsuramenfront.jpg",
-      "rating": "2",
-      "comment": "its a stakehouse not a ramen place"
+      "id": "7",
+      "name": "Anthony Lombardi",
+      "restaurant": "Ichiran",
+      "image": "http://127.0.0.1:5500/assets/ramen/shoyu.jpg",
+      "rating": "8",
+      "comment": "srgdhfdsfadfs"
     },
     {
-      "id": "5878",
-      "name": "dsc",
-      "restaurant": "adsf",
-      "image": "./assets/ramen/kojiro.jpg",
-      "rating": "1",
-      "comment": "efd"
+      "id": "8",
+      "name": "Anthony Lombardi",
+      "restaurant": "Ichiran",
+      "image": "http://127.0.0.1:5500/assets/ramen/shoyu.jpg",
+      "rating": "26",
+      "comment": "sdafghgsfgd"
     }
   ]
 }

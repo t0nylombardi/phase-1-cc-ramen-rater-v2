@@ -3,6 +3,47 @@
 // Constants
 const BASE_URL = "http://localhost:3000/ramens";
 
+const displayRamens = () => {
+  fetch("http://localhost:3000/ramens")
+    .then((response) => response.json())
+    .then((ramens) => {
+      document.getElementById("ramen-menu").innerHTML = "";
+      ramens.forEach(displayRamen);
+      handleClick(ramens[0]);
+    })
+    .catch((error) => console.log(error));
+};
+
+const displayRamen = (ramenObj) => {
+  const ramenMenuDiv = document.getElementById("ramen-menu");
+  const ramenImgDiv = document.createElement("div");
+  const ramenImg = document.createElement("img");
+  const ramenDeleteButton = document.createElement("button");
+
+  ramenImgDiv.classList.add("ramen-image-wrapper");
+  ramenImgDiv.id = `ramenDiv-${ramenObj.id}`;
+
+  ramenDeleteButton.innerText = "Delete";
+  ramenDeleteButton.id = "delete-ramen";
+  ramenDeleteButton.classList.add("delete-button");
+
+  ramenImg.src = ramenObj.image;
+  ramenImg.alt = ramenObj.name;
+  ramenImg.id = `ramen-${ramenObj.id}`;
+  ramenImg.dataset.id = ramenObj.id;
+
+  ramenImgDiv.appendChild(ramenImg);
+  ramenImgDiv.appendChild(ramenDeleteButton);
+  ramenMenuDiv.appendChild(ramenImgDiv);
+  ramenImg.addEventListener("click", (event) => handleClick(ramenObj, event));
+  ramenDeleteButton.addEventListener("click", handleDeleteRamen);
+};
+
+const main = () => {
+  addSubmitListener();
+  displayRamens();
+};
+
 // Callbacks
 const handleClick = (ramen) => {
   const detailImg = document.querySelector("#ramen-detail > .detail-image");
@@ -87,14 +128,7 @@ const handleNewRamenSubmit = (event) => {
     .then(() => event.target.reset())
     .catch((error) => console.error("error:", error));
 
-  const img = document.createElement("img");
-  img.src = newRamen.image;
-  img.alt = newRamen.name;
-  img.dataset.id = newRamen.id;
-
-  img.classList.add("ramen-image");
-  img.addEventListener("click", () => handleClick(img));
-  document.querySelector("#ramen-menu").appendChild(img);
+  displayRamen(newRamen);
 };
 
 const addSubmitListener = () => {
@@ -107,47 +141,6 @@ const addSubmitListener = () => {
   if (editForm) {
     editForm.addEventListener("submit", handleEditRamenSubmit);
   }
-};
-
-const displayRamens = () => {
-  fetch("http://localhost:3000/ramens")
-    .then((response) => response.json())
-    .then((ramens) => {
-      document.getElementById("ramen-menu").innerHTML = "";
-      ramens.forEach(displayRamen);
-      handleClick(ramens[0]);
-    })
-    .catch((error) => console.log(error));
-};
-
-const displayRamen = (ramenObj) => {
-  const ramenMenuDiv = document.getElementById("ramen-menu");
-  const ramenImgDiv = document.createElement("div");
-  const ramenImg = document.createElement("img");
-  const ramenDeleteButton = document.createElement("button");
-
-  ramenImgDiv.classList.add("ramen-image-wrapper");
-  ramenImgDiv.id = `ramenDiv-${ramenObj.id}`;
-
-  ramenDeleteButton.innerText = "Delete";
-  ramenDeleteButton.id = "delete-ramen";
-  ramenDeleteButton.classList.add("delete-button");
-
-  ramenImg.src = ramenObj.image;
-  ramenImg.alt = ramenObj.name;
-  ramenImg.id = `ramen-${ramenObj.id}`;
-  ramenImg.dataset.id = ramenObj.id;
-
-  ramenImgDiv.appendChild(ramenImg);
-  ramenImgDiv.appendChild(ramenDeleteButton);
-  ramenMenuDiv.appendChild(ramenImgDiv);
-  ramenImg.addEventListener("click", (event) => handleClick(ramenObj, event));
-  ramenDeleteButton.addEventListener("click", handleDeleteRamen);
-};
-
-const main = () => {
-  addSubmitListener();
-  displayRamens();
 };
 
 document.addEventListener("DOMContentLoaded", main);
