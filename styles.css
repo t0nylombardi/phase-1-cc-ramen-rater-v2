@@ -100,3 +100,23 @@ form h4 {
   color: white;
   background-color: black;
 }
+
+.ramen-image-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ramen-image-wrapper img {
+  max-width: 100%;
+  margin: 1rem 0;
+}
+
+.ramen-image-wrapper button {
+  /* margin: 1rem 0; */
+  padding: 0.5rem 1rem;
+  border: 1px solid black;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+}

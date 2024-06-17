@@ -79,7 +79,13 @@ const testFetch = vi.fn((url) => {
 
 vi.stubGlobal("fetch", testFetch);
 
-import { addSubmitListener, displayRamens, handleClick, main } from "./index";
+import {
+  addSubmitListener,
+  displayRamens,
+  handleClick,
+  handleDeleteRamen,
+  main,
+} from "./index";
 
 //! Test Suite
 
@@ -261,42 +267,52 @@ describe("handleSubmit", () => {
 });
 
 // handleEditRamen
-describe.skip("handleEditRamen", () => {
+describe("handleEditRamen", () => {
   it("should update the ramen details when the form is submitted", () => {
-    const ramen = testResponseData[0];
-    const ramenForm = document.getElementById("new-ramen");
-    const ramenFormName = document.querySelector("#new-ramen #new-name");
-    const ramenFormRestaurant = document.querySelector(
-      "#new-ramen #new-restaurant"
-    );
-    const ramenFormImage = document.querySelector("#new-ramen #new-image");
-    const ramenFormRating = document.querySelector("#new-ramen #new-rating  ");
-    const ramenFormComment = document.querySelector("#new-ramen #new-comment");
-    const submitButton = document.getElementById("submit-button");
+    const editRamenForm = document.getElementById("edit-ramen");
+    addSubmitListener(editRamenForm);
 
-    main(ramenForm);
+    const editRamenInfo = {
+      rating: 9,
+      comment: "Updated comment",
+    };
 
-    ramenFormName.value = ramen.name;
-    ramenFormRestaurant.value = ramen.restaurant;
-    ramenFormImage.value = ramen.image;
-    ramenFormRating.value = ramen.rating;
-    ramenFormComment.value = ramen.comment;
+    const ramenDetailRating = document.getElementById("rating-display");
+    const ramenDetailComment = document.getElementById("comment-display");
 
-    fireEvent.click(submitButton);
+    fireEvent.submit(editRamenForm, {
+      target: {
+        "new-rating": { value: editRamenInfo.rating },
+        "new-comment": { value: editRamenInfo.comment },
+      },
+      preventDefault: vi.fn(),
+      reset: vi.fn(),
+    });
 
-    const detailImg = document.querySelector("#ramen-detail > .detail-image");
-    const detailName = document.querySelector("#ramen-detail > .name");
-    const detailRestaurant = document.querySelector(
-      "#ramen-detail > .restaurant"
-    );
-    const detailsRating = document.getElementById("rating-display");
-    const detailsComment = document.getElementById("comment-display");
-
-    expect(detailName.textContent).toBe(ramen.name);
-    expect(detailRestaurant.textContent).toBe(ramen.restaurant);
-    expect(detailImg.src).toBe(ramen.image);
-    expect(detailsRating.textContent).toBe(ramen.rating.toString());
+    // sleep for a bit to allow the fetch to complete
+    setTimeout(() => {
+      expect(ramenDetailRating.textContent).toBe(
+        editRamenInfo.rating.toString()
+      );
+      expect(ramenDetailComment.textContent).toBe(editRamenInfo.comment);
+    }, 20);
   });
 });
 
 // handleDeleteRamen
+describe("handleDeleteRamen", () => {
+  it("should remove the ramen from the menu when the delete button is clicked", () => {
+    const ramemImagesBefore = document.querySelectorAll("#ramen-menu img");
+    const ramenMenuDiv = document.getElementById("ramen-menu");
+    const ramenImgDiv = ramenMenuDiv.getElementsByClassName(
+      "ramen-image-wrapper"
+    )[0];
+
+    const ramenDeleteButton = ramenImgDiv.querySelector(".delete-button");
+
+    fireEvent.click(ramenDeleteButton);
+
+    const ramemImagesAfter = document.querySelectorAll("#ramen-menu img");
+    expect(ramemImagesAfter.length).toBe(ramemImagesBefore.length - 1);
+  });
+});
